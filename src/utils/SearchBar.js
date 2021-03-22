@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { Row,Input } from 'antd';
+import { Row,Col,Input } from 'antd';
 import AddressList from '../Components/AddressList/AddressList';
 import InfoCard from '../Components/InfoCard/InfoCard';
+import { useDispatch, useSelector } from 'react-redux';
+import {getAllUsersData, randomUser} from '../Api/randomUser';
 
-function SearchBar() {
+function SearchBar({setShow}) {
+    const dispatch = useDispatch();
+    const userData = useSelector(state =>state.userData.products);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [users, setUsers] = useState([]);
@@ -11,20 +15,22 @@ function SearchBar() {
         setSearchTerm(e.target.value);
       };
 
+    // useEffect(() => {
+    //     dispatch(randomUser());
+    // }, [])  
+
     useEffect(() => {
-        const results = users.filter(item =>
-            item.name.first.toLowerCase().includes(searchTerm)
+        const results = userData && userData.filter(item =>
+            item.name.first.toLowerCase()+" "+item.name.last.toLowerCase().includes(searchTerm.toLowerCase())
           );
           setFilteredUsers(results);
     }, [searchTerm]);
     return (
         <Row className="search-bar__main">
             <Input placeholder="Search Users" enterButton size="large" value={searchTerm} onChange={handleChange}/>
-            {filteredUsers.map(item => (
-                
-                <InfoCard src={item.picture.thumbnail} title={item.name.first+" "+item.name.last} />
+            {filteredUsers && filteredUsers.map(item => (
+                <Col onClick={() => setShow(true)}><InfoCard src={item.picture.thumbnail} title={item.name.first+" "+item.name.last} /></Col>
             ))}
-
         </Row>
     )
 }

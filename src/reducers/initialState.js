@@ -1,5 +1,7 @@
 const initialState = {
+    pending: false,
     userApiData: {},
+    error:null
 
 };
 

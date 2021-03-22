@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 //import { createBrowserHistory } from '../../utils/History';
-import { useHistory } from "react-router-dom";
+import History from "../../utils/History";
 import { Link } from 'react-router-dom';
-import { Form, Input, InputNumber, Button } from 'antd';
+import { Row,Col,Form, Input, InputNumber, Button } from 'antd';
+import { SettingFilled } from '@ant-design/icons';
 
-const Settings = () => {
-    let history = useHistory();
+const Settings = ({location}) => {
   const [nationality, setNationality] = useState('');
   const [input, setInput] = useState('');
 
@@ -30,8 +30,8 @@ const Settings = () => {
             </Col>
             
             <Col span={12} pull={1}>
-            <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages} >
-                <Form.Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
+            <Form name="nest-messages" onFinish={onFinish}>
+                <Form.Item >
                     <Input value={input} onChange={(e) => setInput(e.target.value) }/>
                 </Form.Item>
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import InfoCard from '../InfoCard/InfoCard';
-import { Row, Col, Space,Spin, Modal,Button } from 'antd';
-import {getAllUsersData} from '../../Api/randomUser';
-import { useDispatch } from 'react-redux';
+import { Row, Col, Space,Spin, Modal,Button, Card } from 'antd';
+import {getAllUsersData, randomUser} from '../../Api/randomUser';
+import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DetailModal from '../DetailModal/DetailModal';
 import { Link } from 'react-router-dom'
 
 function AddressList(){
+    const { Meta } = Card;
+    const userData = useSelector(state =>state.userData.products);
+    //const eachDetail = useSelector(state => state.userData.products.find(item=>item.login.uuid))
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
     const [users, setUsers] = useState([]);
@@ -16,11 +19,18 @@ function AddressList(){
     const [data,setData] = useState([]);
 
     useEffect(() => {
+        dispatch(randomUser(page));
+    }, []);
+
+    useEffect(() => {
         const loadUsers = async () => {
             setLoading(true);
             //const newUsers = dispatch(getAllUsersData(setData,page));
             const newUsers = await getAllUsersData(page);
-            setUsers((prev) => [...prev, ...newUsers]);
+            console.log("newUsers", newUsers)
+            const cacheUsers = await getAllUsersData(page+1);
+            console.log("cacheUsers", cacheUsers);
+            setUsers((prev) => [...prev, ...newUsers, ...cacheUsers]);
             setLoading(false);
         }
         loadUsers();
@@ -30,31 +40,39 @@ function AddressList(){
         setLoading(true);
         //const newUsers = dispatch(getAllUsersData(setData,page));
         const newUsers = await getAllUsersData(page);
-        setUsers((prev) => [...prev, ...newUsers]);
+        const cacheUsers = await getAllUsersData(page+1);
+        setUsers((prev) => [...prev, ...newUsers, ...cacheUsers]);
         setLoading(false);
     }
 
-    const handleDetails =(id) => {
-        setShow(true);
-
+    const handleDetails =(event) => {
+        console.log("err");
+        console.log(event.target.id);
+        //setShow(true);
+        
     }
  
-
     return(
         <>
-        {/* <Button onClick={() => {setShow(true)}}>BuTTOn</Button>
-        <Modal title="User Details" visible={show} onOk={handleOk} onCancel={handleCancel}>
-                <p>Name: </p>
-                <p>Age: </p>
-                <p>Email: </p>
-        </Modal> */}
             <InfiniteScroll dataLength={users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
                 <Space size={[8,16]} wrap>
-                    {users && users.map(user => <div key={user.login.uuid} onClick={() => setShow(true)}><InfoCard src={user.picture.thumbnail} title={user.name.first+" "+user.name.last}/></div>)}
+                    {users && users.map((user,index) => 
+                        <Card
+                            hoverable
+                            style={{ width: 200 }}
+                            cover={<img alt="example" src={user.picture.thumbnail} />}
+                            justify="space-around"
+                            id={index}
+                            key={user.login.uuid}
+                            onClick={handleDetails}
+                        >
+                            <Meta title={user.name.first+" "+user.name.last} />
+                        </Card>
+                    )}
                 </Space>
             </InfiniteScroll>
             <DetailModal show={show} handleOk={()=> setShow(false)} handleCancel={()=> setShow(false)}/>
-            
+            {/* <InfoCard src={user.picture.thumbnail} title={user.name.first+" "+user.name.last} onClick={handleDetails}/> */}
         </>
     );
 }

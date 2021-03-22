@@ -5,7 +5,7 @@ import {HomePage} from './Components/HomePage/HomePage';
 import Settings from './Components/Settings/Settings';
 import {ErrorBoundary} from './ErrorBoundary';
 import './App.css';
-import { Layout } from 'antd';
+import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import History from './utils/History';
 function App() {
@@ -14,15 +14,14 @@ function App() {
       <ErrorBoundary>
         <Layout>
           <Header>
-            <h1 style={{ color: 'white'}}>Address Book</h1>
+            <span style={{ color: 'white'}}>Address Book</span>
+            <Link to="/settings" style={{ marginLeft: '70%'}}>Settings</Link>
             
           </Header>
-          <Router history={History}>
             <Switch>
               <Route exact path='/' component={HomePage} />
               <Route exact path='/settings' component={Settings} />
             </Switch>
-          </Router>
   
           <Footer>
               Address Book Exercise ©2021 Created by Zain
