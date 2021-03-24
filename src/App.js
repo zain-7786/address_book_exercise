@@ -5,7 +5,7 @@ import {HomePage} from './Components/HomePage/HomePage';
 import Settings from './Components/Settings/Settings';
 import {ErrorBoundary} from './ErrorBoundary';
 import './App.css';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import History from './utils/History';
 import { useHistory } from 'react-router-dom';
@@ -16,7 +16,7 @@ function App() {
       <ErrorBoundary>
         <Layout>
           <Header>
-            <span style={{ color: 'white'}}>Address Book</span>
+            <Space style={{ color: 'white'}}>Address Book</Space>
             <Link onClick={() => history.push("./settings")} style={{ marginLeft: '70%'}}>Settings</Link>
             
           </Header>

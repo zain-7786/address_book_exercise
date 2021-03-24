@@ -13,6 +13,7 @@ function DetailModal(props) {
                 <p>State: {data && data.location.state}</p>
                 <p>Postcode: {data && data.location.postcode}</p>
                 <p>Phone: {data && data.phone+" cell:"+data && data.cell}</p>
+                <p>Nationality: {data && data.nat}</p>
             </Modal>
     )
 }

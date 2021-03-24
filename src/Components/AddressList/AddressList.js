@@ -12,6 +12,7 @@ function AddressList(){
     const { Meta } = Card;
     const userData = useSelector(state =>state.userData.users);
     //const eachDetail = useSelector(state => state.userData.products.find(item=>item.login.uuid))
+    const nationalityFilter = useSelector(state=> state.natUsers.nationalUsers);
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
     const [users, setUsers] = useState([]);
@@ -55,7 +56,8 @@ function AddressList(){
         <>
             <InfiniteScroll dataLength={users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
                 <Space size={[8,16]} wrap>
-                    {users && users.map((user,index) => 
+                    { nationalityFilter ?
+                    nationalityFilter && nationalityFilter.map((user,index) => 
                         <Col onClick={() => handleDetails(user)}  key={user.login.uuid} id={user.login.uuid}>
                             <Card
                             hoverable
@@ -65,7 +67,20 @@ function AddressList(){
                             >
                             <Meta title={user.name.first+" "+user.name.last} />
                             </Card> </Col>
-                    )}
+                    )
+                    :
+                    users && users.map((user,index) => 
+                        <Col onClick={() => handleDetails(user)}  key={user.login.uuid} id={user.login.uuid}>
+                            <Card
+                            hoverable
+                            style={{ width: 200 }}
+                            cover={<img alt="example" src={user.picture.thumbnail} />}
+                            justify="space-around" 
+                            >
+                            <Meta title={user.name.first+" "+user.name.last} />
+                            </Card> </Col>
+                    )
+                    }
                 </Space>
             </InfiniteScroll>
             <DetailModal show={show} handleOk={()=> setShow(false)} handleCancel={()=> setShow(false)} />

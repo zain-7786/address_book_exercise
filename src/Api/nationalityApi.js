@@ -4,7 +4,7 @@ import { fetchNatUsersSuccess } from '../actions/nationalityApiAction';
      return dispatch => {
          //dispatch(fetchNatUsersPending());
 //     .then((response) => {
-         fetch(`https://randomuser.me/api/?nat=${nat}`)
+         fetch(`https://randomuser.me/api/?nat=${nat}&&results=10`)
          .then(res => res.json())
          .then(res => {
              if(res.error) {

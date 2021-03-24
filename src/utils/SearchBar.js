@@ -30,7 +30,7 @@ function SearchBar({show,setShow}) {
     }, [searchTerm]);
     return (
         <Row className="search-bar__main">
-            <Input placeholder="Search Users" enterButton size="large" value={searchTerm} onChange={handleChange}/>
+            <Input placeholder="Search Users" enterButton size="middle" value={searchTerm} onChange={handleChange}/>
             <Space size={[8,16]} wrap>
             {filteredUsers && filteredUsers.map(item => (
                 <Col onClick={() => setShow(true)}><InfoCard src={item.picture.thumbnail} title={item.name.first+" "+item.name.last} /></Col>
