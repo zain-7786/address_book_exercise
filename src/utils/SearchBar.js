@@ -4,8 +4,9 @@ import AddressList from '../Components/AddressList/AddressList';
 import InfoCard from '../Components/InfoCard/InfoCard';
 import { useDispatch, useSelector } from 'react-redux';
 import {getAllUsersData, randomUser} from '../Api/randomUser';
+import DetailModal from '../Components/DetailModal/DetailModal';
 
-function SearchBar({setShow}) {
+function SearchBar({show,setShow}) {
     const dispatch = useDispatch();
     const userData = useSelector(state =>state.userData.products);
     const [searchTerm, setSearchTerm] = useState("");
@@ -21,9 +22,11 @@ function SearchBar({setShow}) {
 
     useEffect(() => {
         const results = userData && userData.filter(item =>
-            item.name.first.toLowerCase()+" "+item.name.last.toLowerCase().includes(searchTerm.toLowerCase())
+            (item.name.first.toLowerCase()+" "+item.name.last.toLowerCase()).includes(searchTerm.toLowerCase())
           );
           setFilteredUsers(results);
+          console.log("filter",searchTerm)
+          debugger;
     }, [searchTerm]);
     return (
         <Row className="search-bar__main">
@@ -31,6 +34,7 @@ function SearchBar({setShow}) {
             {filteredUsers && filteredUsers.map(item => (
                 <Col onClick={() => setShow(true)}><InfoCard src={item.picture.thumbnail} title={item.name.first+" "+item.name.last} /></Col>
             ))}
+            <DetailModal show={show} handleOk={()=> setShow(false)} handleCancel={()=> setShow(false)}/>
         </Row>
     )
 }

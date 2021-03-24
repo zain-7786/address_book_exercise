@@ -8,14 +8,16 @@ import './App.css';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import History from './utils/History';
+import { useHistory } from 'react-router-dom';
 function App() {
     const { Header, Footer } = Layout;
+    const history = useHistory();
     return(
       <ErrorBoundary>
         <Layout>
           <Header>
             <span style={{ color: 'white'}}>Address Book</span>
-            <Link to="/settings" style={{ marginLeft: '70%'}}>Settings</Link>
+            <Link onClick={() => history.push("./settings")} style={{ marginLeft: '70%'}}>Settings</Link>
             
           </Header>
             <Switch>

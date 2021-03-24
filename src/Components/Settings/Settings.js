@@ -11,12 +11,11 @@ const Settings = ({location}) => {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const q = params.get('nat');
+    const nat = params.get('nat');
     setNationality(nat ? nat : 'US');
   }, []);
 
   const onFinish = (e) => {
-    e.preventDefault();
     setNationality(input);
     History.push('https://randomuser.me/api/?nat=' + input);
     setInput('');
@@ -34,11 +33,9 @@ const Settings = ({location}) => {
                 <Form.Item >
                     <Input value={input} onChange={(e) => setInput(e.target.value) }/>
                 </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                 <Button type="primary" htmlType="submit">
                 Search
                 </Button>
-                </Form.Item>
             </Form>
             </Col>
             <Col>

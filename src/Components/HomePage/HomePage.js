@@ -11,7 +11,7 @@ export function HomePage() {
     return (  
         <Content>  
             <Row align="middle" justify="center">  
-                {/* <Col><SearchBar /></Col> */}
+                <Col><SearchBar /></Col>
             </Row>
             <AddressList />
         </Content>

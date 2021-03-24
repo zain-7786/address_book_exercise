@@ -16,7 +16,9 @@ function AddressList(){
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [show, setShow] = useState(false);
-    const [data,setData] = useState([]);
+    const [detail,setDetail] = useState({
+        name: ""
+    });
 
     useEffect(() => {
         dispatch(randomUser(page));
@@ -45,10 +47,11 @@ function AddressList(){
         setLoading(false);
     }
 
-    const handleDetails =(event) => {
+    const handleDetails =(event,data) => {
         console.log("err");
-        console.log(event.target.id);
-        //setShow(true);
+        //console.log(event.target.data);
+        setDetail(data);
+        setShow(true);
         
     }
  
@@ -57,21 +60,19 @@ function AddressList(){
             <InfiniteScroll dataLength={users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
                 <Space size={[8,16]} wrap>
                     {users && users.map((user,index) => 
-                        <Card
+                        <Link onClick={handleDetails}  key={user.login.uuid} id={index}>
+                            <Card
                             hoverable
                             style={{ width: 200 }}
                             cover={<img alt="example" src={user.picture.thumbnail} />}
-                            justify="space-around"
-                            id={index}
-                            key={user.login.uuid}
-                            onClick={handleDetails}
-                        >
+                            justify="space-around" 
+                            >
                             <Meta title={user.name.first+" "+user.name.last} />
-                        </Card>
+                            </Card> </Link>
                     )}
                 </Space>
             </InfiniteScroll>
-            <DetailModal show={show} handleOk={()=> setShow(false)} handleCancel={()=> setShow(false)}/>
+            <DetailModal show={show} handleOk={()=> setShow(false)} handleCancel={()=> setShow(false)} name={detail && detail.name}/>
             {/* <InfoCard src={user.picture.thumbnail} title={user.name.first+" "+user.name.last} onClick={handleDetails}/> */}
         </>
     );
