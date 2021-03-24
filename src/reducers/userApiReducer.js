@@ -1,6 +1,6 @@
-import * as types from '../actions/actionTypes';
+//import * as types from '../actions/actionTypes';
 import initialState from './initialState';
-import {FETCH_USERS_PENDING, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR} from '../actions/userApiAction';
+import {FETCH_USERS_PENDING, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR, FETCH_SINGLE_USER_DATA} from '../actions/userApiAction';
 
 // export default (state = initialState.userApiData, { type, payload}) => {
 //     switch(type) {
@@ -14,7 +14,7 @@ import {FETCH_USERS_PENDING, FETCH_USERS_SUCCESS, FETCH_USERS_ERROR} from '../ac
 //     }
 // };
 
-export function userApiReducer(state = initialState, action) {
+export function userApiReducer(state = initialState.users, action) {
     switch(action.type) {
         
         case FETCH_USERS_PENDING: 
@@ -26,7 +26,7 @@ export function userApiReducer(state = initialState, action) {
             return {
                 ...state,
                 pending: false,
-                products: action.products
+                users: action.payload
                 
             }
         case FETCH_USERS_ERROR:
@@ -40,6 +40,18 @@ export function userApiReducer(state = initialState, action) {
     }
 }
 
-export const getProducts = state => state.products;
-export const getProductsPending = state => state.pending;
-export const getProductsError = state => state.error;
+export function singleUserApi(state = initialState.singleUser, action){
+    switch(action.type) {
+        case FETCH_SINGLE_USER_DATA:
+            return {
+                ...state,
+                thisUser: action.payload
+            }
+        default:
+            return state;    
+    }
+}
+
+export const getUsers = state => state.users;
+export const getUsersPending = state => state.pending;
+export const getUsersError = state => state.error;

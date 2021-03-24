@@ -1,25 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 //import { createBrowserHistory } from '../../utils/History';
 import History from "../../utils/History";
 import { Link } from 'react-router-dom';
 import { Row,Col,Form, Input, InputNumber, Button } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { nationalityApi } from '../../Api/nationalityApi';
 
 const Settings = ({location}) => {
+  const dispatch = useDispatch();
   const [nationality, setNationality] = useState('');
   const [input, setInput] = useState('');
 
+  const onFinish = async (event) => {
+    console.log("value",event.target.value);
+    console.log("name", event.target.name);
+    const value = input.current.value;
+    //setInput(value);
+    if(value){
+      dispatch(nationalityApi(value));
+    }
+  }
+
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const nat = params.get('nat');
-    setNationality(nat ? nat : 'US');
+    // const params = new URLSearchParams(location.search);
+    // const nat = params.get('nat');
+    // setNationality(nat ? nat : 'US');
   }, []);
 
-  const onFinish = (e) => {
-    setNationality(input);
-    History.push('https://randomuser.me/api/?nat=' + input);
-    setInput('');
-  };
+  // const onFinish = (e) => {
+  //   setNationality(input);
+  //   History.push('https://randomuser.me/api/?nat=' + input);
+  //   setInput('');
+  // };
 
   return (
     <>
@@ -31,7 +44,7 @@ const Settings = ({location}) => {
             <Col span={12} pull={1}>
             <Form name="nest-messages" onFinish={onFinish}>
                 <Form.Item >
-                    <Input value={input} onChange={(e) => setInput(e.target.value) }/>
+                    <Input name="search" value={input} onChange={(e) => setInput(e.target.value) }/>
                 </Form.Item>
                 <Button type="primary" htmlType="submit">
                 Search

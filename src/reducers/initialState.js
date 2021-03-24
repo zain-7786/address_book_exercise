@@ -1,8 +1,9 @@
 const initialState = {
     pending: false,
-    userApiData: {},
-    error:null
-
+    users: [],
+    error: null,
+    singleUser: [],
+    nationalUsers: []
 };
 
 export default initialState;
