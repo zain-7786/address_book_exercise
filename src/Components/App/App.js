@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {HomePage} from '../HomePage/HomePage';
 import Settings from '../Settings/Settings';
-import {ErrorBoundary} from '../../ErrorBoundary';
+import {ErrorBoundary} from '../ErrorBoundary';
 import './App.css';
 import { Layout, Menu, Space } from 'antd';
 import { Link } from 'react-router-dom';

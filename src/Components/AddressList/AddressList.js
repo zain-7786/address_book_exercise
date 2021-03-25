@@ -7,7 +7,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import DetailModal from '../DetailModal/DetailModal';
 import { Link } from 'react-router-dom';
 import { fetchSingleUserData } from '../../Redux/actions/userApiAction';
-import SearchBar from '../../utils/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 
 
 function AddressList(){
@@ -64,10 +64,10 @@ function AddressList(){
                 <Space size={[8,16]} wrap>
                     
                     {nationalityFilter && nationalityFilter.map((user,index) => 
-                        <Col onClick={() => handleDetails(user)}  key={user.login.uuid} id={user.login.uuid}>
+                        <Col onClick={() => handleDetails(user)}  key={user.login.uuid} id={user.login.uuid} span={4}>
                             <Card
                             hoverable
-                            style={{ width: 200 }}
+                            style={{ width: 180 }}
                             cover={<img alt="example" src={user.picture.thumbnail} />}
                             justify="space-around" 
                             >
@@ -93,6 +93,7 @@ function AddressList(){
                     }
                 </Space>
             </InfiniteScroll>)}
+            {users.length ? <Button disabled="true" style={{ marginLeft: '40%'}}>No More Data Exist</Button>: ""}
             <DetailModal show={show} handleOk={()=> setShow(false)} handleCancel={()=> setShow(false)} />
             {/* <InfoCard src={user.picture.thumbnail} title={user.name.first+" "+user.name.last} onClick={handleDetails}/> */}
         </>

@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from '../../utils/SearchBar';
+import SearchBar from '../SearchBar/SearchBar';
 import { Row, Col,Space } from 'antd';
 //import InfiniteScrolling from '../utils/InfiniteScrolling';
 import AddressList from '../AddressList/AddressList';
