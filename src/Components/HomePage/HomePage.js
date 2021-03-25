@@ -11,9 +11,9 @@ export function HomePage() {
     return (  
         <Content> 
             <Space direction="vertical">
-            <Row align="middle" justify="center" >  
+            {/* <Row align="middle" justify="center" >  
                 <Col ><SearchBar /></Col>
-            </Row>
+            </Row> */}
             <AddressList />
             </Space> 
         </Content>

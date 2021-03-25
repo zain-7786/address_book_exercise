@@ -10,7 +10,7 @@
      return dispatch => {
          dispatch(fetchUsersPending());
 //     .then((response) => {
-         fetch('https://randomuser.me/api/?page=${page}&results=50')
+         fetch(`https://randomuser.me/api/?page=${page}&results=50`)
          .then(res => res.json())
          .then(res => {
              if(res.error) {
@@ -37,7 +37,6 @@
 //         {
 //             setUsers(data.results);
 //             setIsLoading(false);
-//             debugger;
 //             if(pageNo > 1){
 //                 let resultArr = [...users, ...data.results]
 //                 setUsers(resultArr);

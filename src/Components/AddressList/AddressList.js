@@ -7,12 +7,15 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import DetailModal from '../DetailModal/DetailModal';
 import { Link } from 'react-router-dom';
 import { fetchSingleUserData } from '../../actions/userApiAction';
+import SearchBar from '../../utils/SearchBar';
+
 
 function AddressList(){
     const { Meta } = Card;
     const userData = useSelector(state =>state.userData.users);
     //const eachDetail = useSelector(state => state.userData.products.find(item=>item.login.uuid))
     const nationalityFilter = useSelector(state=> state.natUsers.nationalUsers);
+    console.log("nationalityfilters: ", nationalityFilter);
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
     const [users, setUsers] = useState([]);
@@ -51,10 +54,12 @@ function AddressList(){
         dispatch(fetchSingleUserData(event));
         setShow(true);
     }
- 
     return(
         <>
-            <InfiniteScroll dataLength={users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
+            <Row align="middle" justify="center" >  
+                <Col ><SearchBar show={show} setShow={setShow}/></Col>
+            </Row>
+            <InfiniteScroll dataLength={users && users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
                 <Space size={[8,16]} wrap>
                     { nationalityFilter ?
                     nationalityFilter && nationalityFilter.map((user,index) => 

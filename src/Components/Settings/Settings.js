@@ -21,6 +21,9 @@ const Settings = ({location}) => {
   const routeChange = () => {
     let path = '/';
     history.push(path);
+    if(input){
+      dispatch(nationalityApi(input));
+    }
   }
 
   return (
