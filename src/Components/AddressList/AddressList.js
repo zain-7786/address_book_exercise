@@ -56,15 +56,11 @@ function AddressList(){
     }
     return(
         <>
-<<<<<<< HEAD
-        { nationalityFilter ?
-            (<InfiniteScroll dataLength={nationalityFilter.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
-=======
             <Row align="middle" justify="center" >  
                 <Col ><SearchBar show={show} setShow={setShow}/></Col>
             </Row>
-            <InfiniteScroll dataLength={users && users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
->>>>>>> 9eb3378e6642fe5257e73162f386be406fe20fed
+            {nationalityFilter ?
+            (<InfiniteScroll dataLength={users && users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
                 <Space size={[8,16]} wrap>
                     
                     {nationalityFilter && nationalityFilter.map((user,index) => 
