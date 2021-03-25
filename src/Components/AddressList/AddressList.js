@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import InfoCard from '../InfoCard/InfoCard';
 import { Row, Col, Space,Spin, Modal,Button, Card } from 'antd';
-import {getAllUsersData, randomUser} from '../../Api/randomUser';
+import {getAllUsersData, randomUser} from '../../Services/randomUser';
 import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DetailModal from '../DetailModal/DetailModal';
 import { Link } from 'react-router-dom';
-import { fetchSingleUserData } from '../../actions/userApiAction';
+import { fetchSingleUserData } from '../../Redux/actions/userApiAction';
 import SearchBar from '../../utils/SearchBar';
 
 

@@ -1,4 +1,4 @@
-import { fetchNatUsersSuccess } from '../actions/nationalityApiAction';
+import { fetchNatUsersSuccess } from '../Redux/actions/nationalityApiAction';
 
  export function nationalityApi(nat) {
      

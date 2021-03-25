@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { Row,Col,Form, Input, InputNumber, Button } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { nationalityApi } from '../../Api/nationalityApi';
+import { nationalityApi } from '../../Services/nationalityApi';
 
 const Settings = ({location}) => {
   let history = useHistory();

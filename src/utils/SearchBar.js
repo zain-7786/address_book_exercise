@@ -1,12 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { Row,Col,Input, Space, Card } from 'antd';
-import AddressList from '../Components/AddressList/AddressList';
 import InfoCard from '../Components/InfoCard/InfoCard';
 import { useDispatch, useSelector } from 'react-redux';
-import {getAllUsersData, randomUser} from '../Api/randomUser';
+//import {getAllUsersData, randomUser} from '../Services/randomUser';
 import DetailModal from '../Components/DetailModal/DetailModal';
-import {Link} from "react-router-dom";
-import { fetchSingleUserData } from '../actions/userApiAction';
+import { fetchSingleUserData } from '../Redux/actions/userApiAction';
 
 function SearchBar() {
     const { Meta } = Card;

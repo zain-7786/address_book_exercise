@@ -4,7 +4,7 @@
  const url = 'https://randomuser.me/api/';
 
 
- import {fetchUsersPending, fetchUsersSuccess, fetchUsersError} from '../actions/userApiAction';
+ import {fetchUsersPending, fetchUsersSuccess, fetchUsersError} from '../Redux/actions/userApiAction';
 
  export function randomUser(page) {
      return dispatch => {

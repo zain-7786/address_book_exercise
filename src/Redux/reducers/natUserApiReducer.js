@@ -7,8 +7,7 @@ export function natUserApiReducer(state = initialState.nationalUsers, action) {
         case FETCH_NAT_USERS_SUCCESS:
             return {
                 ...state,
-                nationalUsers: action.payload
-                
+                nationalUsers: action.payload  
             }
         default: 
             return state;

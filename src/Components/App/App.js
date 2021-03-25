@@ -1,13 +1,13 @@
 import React from "react";
 import { hot } from 'react-hot-loader/root';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import {HomePage} from './Components/HomePage/HomePage';
-import Settings from './Components/Settings/Settings';
-import {ErrorBoundary} from './ErrorBoundary';
+import {HomePage} from '../HomePage/HomePage';
+import Settings from '../Settings/Settings';
+import {ErrorBoundary} from '../../ErrorBoundary';
 import './App.css';
 import { Layout, Menu, Space } from 'antd';
 import { Link } from 'react-router-dom';
-import History from './utils/History';
+import History from '../../utils/History';
 import { useHistory } from 'react-router-dom';
 function App() {
     const { Header, Footer } = Layout;
@@ -21,8 +21,8 @@ function App() {
             
           </Header>
             <Switch>
-              <Route exact path='/' component={HomePage} />
-              <Route exact path='/settings' component={Settings} />
+              <Route path='/' exact component={HomePage} />
+              <Route path='/settings' component={Settings} />
             </Switch>
   
           <Footer>
