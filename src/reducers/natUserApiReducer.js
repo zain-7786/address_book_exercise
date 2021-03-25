@@ -2,6 +2,7 @@ import initialState from './initialState';
 import {FETCH_NAT_USERS_PENDING, FETCH_NAT_USERS_SUCCESS, FETCH_NAT_USERS_ERROR} from '../actions/nationalityApiAction';
 
 export function natUserApiReducer(state = initialState.nationalUsers, action) {
+    debugger;
     switch(action.type) {
         case FETCH_NAT_USERS_SUCCESS:
             return {

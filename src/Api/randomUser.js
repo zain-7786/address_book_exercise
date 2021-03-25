@@ -37,7 +37,6 @@
 //         {
 //             setUsers(data.results);
 //             setIsLoading(false);
-//             debugger;
 //             if(pageNo > 1){
 //                 let resultArr = [...users, ...data.results]
 //                 setUsers(resultArr);
