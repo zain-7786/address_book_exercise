@@ -1,16 +1,19 @@
 import { fetchNatUsersSuccess } from '../actions/nationalityApiAction';
 
  export function nationalityApi(nat) {
+     
      return dispatch => {
          //dispatch(fetchNatUsersPending());
 //     .then((response) => {
-         fetch(`https://randomuser.me/api/?nat=${nat}&&results=10`)
+         fetch(`https://randomuser.me/api/?nat=${nat}&results=100`)
          .then(res => res.json())
          .then(res => {
              if(res.error) {
                  throw(res.error);
              }
+             console.log("actual nationality", nat);
              dispatch(fetchNatUsersSuccess(res.results));
+             console.log("after nationality", nat);
              return res.results;
          })
          .catch(error => {

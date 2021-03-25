@@ -54,10 +54,11 @@ function AddressList(){
  
     return(
         <>
-            <InfiniteScroll dataLength={users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
+        { nationalityFilter ?
+            (<InfiniteScroll dataLength={nationalityFilter.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
                 <Space size={[8,16]} wrap>
-                    { nationalityFilter ?
-                    nationalityFilter && nationalityFilter.map((user,index) => 
+                    
+                    {nationalityFilter && nationalityFilter.map((user,index) => 
                         <Col onClick={() => handleDetails(user)}  key={user.login.uuid} id={user.login.uuid}>
                             <Card
                             hoverable
@@ -67,9 +68,13 @@ function AddressList(){
                             >
                             <Meta title={user.name.first+" "+user.name.last} />
                             </Card> </Col>
-                    )
+                )}
+                </Space>
+            </InfiniteScroll>)
                     :
-                    users && users.map((user,index) => 
+            (<InfiniteScroll dataLength={users.length} next={loadUsers} hasMore={true} loader={<Row justify="center"><Spin tip="Loading..." /></Row>}>
+                <Space size={[8,16]} wrap>        
+                    {users && users.map((user,index) => 
                         <Col onClick={() => handleDetails(user)}  key={user.login.uuid} id={user.login.uuid}>
                             <Card
                             hoverable
@@ -82,7 +87,7 @@ function AddressList(){
                     )
                     }
                 </Space>
-            </InfiniteScroll>
+            </InfiniteScroll>)}
             <DetailModal show={show} handleOk={()=> setShow(false)} handleCancel={()=> setShow(false)} />
             {/* <InfoCard src={user.picture.thumbnail} title={user.name.first+" "+user.name.last} onClick={handleDetails}/> */}
         </>
